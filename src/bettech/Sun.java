@@ -15,17 +15,12 @@ import java.util.Random;
  * @author Eusuph
  */
 public class Sun extends Observable {
-    private List<Observer> observersList = new ArrayList<>();
 
+    private List<Observer> observersList = new ArrayList<>();
+    int total = 0;
     int counter;
     int dayCount = 24;
     int midDay = 12;
-
-
-
-    void onDayEnd(int end) {
-        System.out.println("DAY END: " + end);
-    }
 
     public List<Observer> getObserversList() {
         return observersList;
@@ -34,26 +29,25 @@ public class Sun extends Observable {
     public void setObserversList(List<Observer> observersList) {
         this.observersList = observersList;
     }
-    
-    
 
     void send() {
 
         for (counter = 0; counter < dayCount; counter++) {
+
             if (counter < midDay) {
                 setChanged();
                 notifyObservers(counter);
+                total++;
                 try {
                     Thread.sleep(midDay);
+                    
                 } catch (Exception e) {
                     System.out.println("Error Occured.");
                 }
-            } else {
-                onDayEnd(midDay - 2);
             }
+
         }
 
     }
-    
 
 }
