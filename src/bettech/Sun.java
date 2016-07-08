@@ -6,9 +6,13 @@
 package bettech;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -16,19 +20,40 @@ import java.util.Random;
  */
 public class Sun extends Observable {
 
-    private List<Observer> observersList = new ArrayList<>();
+    private Set<Observer> observersList;
+    private Map<Observer,Subject> myMap;
+    
     int total = 0;
     int counter;
     int dayCount = 24;
     int midDay = 12;
 
-    public List<Observer> getObserversList() {
-        return observersList;
+    public Sun() {
+        observersList = new HashSet<>();
+        myMap = new HashMap<>();
     }
 
-    public void setObserversList(List<Observer> observersList) {
-        this.observersList = observersList;
+    public void registerObserver(Observer observer) {
+        if (observer != null && observer instanceof Observer) {
+            this.observersList.add(observer);
+        }
     }
+
+    public void removeObserver(Observer observer) {
+        if (observer != null && observer instanceof Observer) {
+            this.observersList.remove(observer);
+        }
+    }
+
+   void testMap(Observer obs,Subject sub){
+       
+       if (obs != null && obs instanceof Observer) {
+           if(sub != null && sub instanceof Subject){
+               this.myMap.put(obs, sub);
+           }
+       }
+   }
+    
 
     void send() {
 
@@ -39,13 +64,14 @@ public class Sun extends Observable {
                 notifyObservers(counter);
                 total++;
                 try {
-                    Thread.sleep(midDay);
-                    
+                    Thread.sleep(1000);
+
                 } catch (Exception e) {
                     System.out.println("Error Occured.");
                 }
+                System.out.println("EXIT: " + Thread.activeCount());
             }
-
+            
         }
 
     }

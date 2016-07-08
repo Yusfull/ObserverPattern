@@ -18,7 +18,6 @@ public class TestObserver {
         
         sunObservable.addObserver(flower);
         sunObservable.addObserver(sunBird);
-        
         sunObservable.send();
     }
     
