@@ -10,15 +10,16 @@ package bettech;
  * @author Eusuph
  */
 public class TestObserver {
+
     public static void main(String[] args) {
-        
+
         Sun sunObservable = new Sun();
         Flower flower = new Flower();
         SunBird sunBird = new SunBird();
-        
+
         sunObservable.addObserver(flower);
         sunObservable.addObserver(sunBird);
         sunObservable.send();
     }
-    
+
 }

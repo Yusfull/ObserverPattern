@@ -20,40 +20,10 @@ import java.util.Set;
  */
 public class Sun extends Observable {
 
-    private Set<Observer> observersList;
-    private Map<Observer,Subject> myMap;
-    
     int total = 0;
     int counter;
     int dayCount = 24;
     int midDay = 12;
-
-    public Sun() {
-        observersList = new HashSet<>();
-        myMap = new HashMap<>();
-    }
-
-    public void registerObserver(Observer observer) {
-        if (observer != null && observer instanceof Observer) {
-            this.observersList.add(observer);
-        }
-    }
-
-    public void removeObserver(Observer observer) {
-        if (observer != null && observer instanceof Observer) {
-            this.observersList.remove(observer);
-        }
-    }
-
-   void testMap(Observer obs,Subject sub){
-       
-       if (obs != null && obs instanceof Observer) {
-           if(sub != null && sub instanceof Subject){
-               this.myMap.put(obs, sub);
-           }
-       }
-   }
-    
 
     void send() {
 
@@ -71,7 +41,7 @@ public class Sun extends Observable {
                 }
                 System.out.println("EXIT: " + Thread.activeCount());
             }
-            
+
         }
 
     }
